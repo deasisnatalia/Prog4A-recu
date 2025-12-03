@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Alumnos</h2>
+
+<a href="{% url 'crear_alumno' %}" class="btn btn-success">Crear alumno</a>
+<a href="{% url 'exportar_csv' %}" class="btn btn-secondary">Exportar CSV</a>
+
+<table class="table mt-3">
+    <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Nota</th>
+        <th>PDF</th>
+    </tr>
+    {% for a in alumnos %}
+    <tr>
+        <td>{{ a.nombre }}</td>
+        <td>{{ a.apellido }}</td>
+        <td>{{ a.nota }}</td>
+        <td>
+            <a href="{% url 'generar_pdf' a.id %}">PDF</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

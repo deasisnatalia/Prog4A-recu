@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Scraper Wikipedia</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" name="buscar" class="btn btn-primary">Buscar</button>
+</form>
+
+{% if error %}
+  <div class="alert alert-danger mt-3">{{ error }}</div>
+{% endif %}
+
+{% if resultados %}
+  <hr>
+  <h4>Resultados para: {{ resultados.termino }}</h4>
+
+  <p><a href="{{ resultados.url }}" target="_blank">Abrir en Wikipedia</a></p>
+
+  <h5>Primer párrafo</h5>
+  <p>{{ resultados.first_para }}</p>
+
+  <h5>Secciones</h5>
+  <ul>
+    {% for s in resultados.secciones %}
+      <li>{{ s }}</li>
+    {% endfor %}
+  </ul>
+
+  <form action="{% url 'enviar_resultados' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="termino" value="{{ resultados.termino }}">
+    <input type="hidden" name="first_para" value="{{ resultados.first_para }}">
+    {% for s in resultados.secciones %}
+      <input type="hidden" name="secciones" value="{{ s }}">
+    {% endfor %}
+    <button class="btn btn-success mt-2">Enviar resultados por correo</button>
+  </form>
+{% endif %}
+
+{% endblock %}

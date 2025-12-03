@@ -1,0 +1,45 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ---- Entornos virtuales ----
+venv/
+env/
+.venv/
+.env/
+
+# ---- Django ----
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Archivos cargados por usuarios
+media/
+staticfiles/
+
+# Si usás collectstatic
+/staticfiles/
+/static/
+
+# ---- IDEs ----
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# ---- Compilados ----
+*.so
+*.pid
+
+# ---- Sistema ----
+.DS_Store
+Thumbs.db
+
+# ---- Node/npm (por si usás algo front) ----
+node_modules/
+
+# ---- Render ----
+render.yaml
